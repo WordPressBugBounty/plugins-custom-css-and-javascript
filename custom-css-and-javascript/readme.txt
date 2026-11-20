@@ -2,8 +2,8 @@
 Contributors: aspengrovestudios, annaqq
 Tags: custom css, styles, stylesheet, javascript, custom javascript
 Requires at least: 3.5
-Tested up to: 6.6.1
-Stable tag: 2.0.16
+Tested up to: 7.1
+Stable tag: 2.0.17
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,10 @@ To view WP Zone's premium WordPress plugins and themes, visit our [WordPress pro
 
 
 == Changelog ==
+
+= 2.0.17 - November 20, 2026 =
+* Security fix: restrict draft CSS and JavaScript previews to users who can edit them
+* Security fix: add capability and nonce checks when dismissing the review notice
 
 = 2.0.16 - August 29, 2023 =
 * Revert changes related to the admin page slug change

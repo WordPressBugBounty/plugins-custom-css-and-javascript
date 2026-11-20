@@ -51,7 +51,7 @@ Access unminified version by replacing the .min.css extension with .css  */
 
   }
 @media (max-width : 761px) {
-  .hm_custom_code_editor_inner #pp_custom_css_js_dev_info, .hm_custom_code_editor_inner #wpz-custom-css-js-info {
+  .hm_custom_code_editor_inner #pp_custom_css_js_dev_info  {
     display : none;
     }
 
@@ -61,12 +61,13 @@ Access unminified version by replacing the .min.css extension with .css  */
   }
 
 @media (min-width : 760px) {
-  .wpz-custom-css-js-settings-active > #pp_custom_css_js_dev_info, .wpz-custom-css-js-settings-active > #wpz-custom-css-js-info {
+  .wpz-custom-css-js-settings-active > #pp_custom_css_js_dev_info  {
     display : none;
     }
   }
 
-#pp_custom_css_js_dev_info, #wpz-custom-css-js-info {
+
+#pp_custom_css_js_dev_info {
   padding          : 35px 20px;
   color            : #fff;
   background-color : #6a39e4;

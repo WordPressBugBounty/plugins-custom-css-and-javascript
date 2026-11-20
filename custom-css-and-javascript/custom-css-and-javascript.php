@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom CSS and JavaScript
  * Description: Easily add custom CSS and JavaScript code to your WordPress site.
- * Version: 2.0.16
+ * Version: 2.0.17
  * Author: WP Zone
  * Author URI: https://wpzone.co/?utm_source=custom-css-and-javascript&utm_medium=link&utm_campaign=wp-plugin-author-uri
  * License: GNU General Public License version 3 or later
@@ -11,7 +11,7 @@
 
 /*
 	Custom CSS and JavaScript plugin
-    Copyright (C) 2024 WP Zone
+    Copyright (C) 2026 WP Zone
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-define('HM_CUSTOM_CSS_JS_VERSION', '2.0.16');
+define('HM_CUSTOM_CSS_JS_VERSION', '2.0.17');
 
 add_action('wp_enqueue_scripts', 'hm_custom_css_js_scripts', 999999);
 function hm_custom_css_js_scripts() {
@@ -282,7 +282,12 @@ function hm_custom_css_js_init() {
 		$adminRole->add_cap('wpz_custom_css_js');
 	}
 	
+	// Drafts are unpublished code, so only users who may edit it can view them
+	if (!current_user_can('wpz_custom_css_js'))
+		return;
+	
 	if (!empty($_GET['hm_custom_css_draft'])) {
+		nocache_headers();
 		$wp_query = new WP_Query(array(
 			'post_type' => 'hm_custom_css',
 			'post_status' => 'any',
@@ -295,6 +300,7 @@ function hm_custom_css_js_init() {
 		exit;
 	}
 	if (!empty($_GET['hm_custom_js_draft'])) {
+		nocache_headers();
 		$wp_query = new WP_Query(array(
 			'post_type' => 'hm_custom_javascript',
 			'post_status' => 'any',
@@ -305,6 +311,11 @@ function hm_custom_css_js_init() {
 		if (isset($posts[0]))
 			echo($posts[0]->post_content);
 		exit;
+	}
+	
+	if (is_admin() && get_option('hm_custom_css_js_rd_notice_hidden') != 1 && time() - get_option('hm_custom_css_js_first_activate') >= (14*86400)) {
+		add_action('admin_notices', 'hm_custom_css_js_rd_notice');
+		add_action('wp_ajax_hm_custom_css_js_rd_notice_hide', 'hm_custom_css_js_rd_notice_hide');
 	}
 }
 
@@ -323,10 +334,6 @@ function hm_custom_css_js_first_activate() {
 		update_option($pre.'_first_activate', time());
 	}
 }
-if (is_admin() && get_option('hm_custom_css_js_rd_notice_hidden') != 1 && time() - get_option('hm_custom_css_js_first_activate') >= (14*86400)) {
-	add_action('admin_notices', 'hm_custom_css_js_rd_notice');
-	add_action('wp_ajax_hm_custom_css_js_rd_notice_hide', 'hm_custom_css_js_rd_notice_hide');
-}
 function hm_custom_css_js_rd_notice() {
 	$pre = 'hm_custom_css_js';
 	$slug = 'custom-css-and-javascript';
@@ -334,11 +341,13 @@ function hm_custom_css_js_rd_notice() {
 		<div id="'.$pre.'_rd_notice" class="updated notice is-dismissible"><p>Does the <strong>Custom CSS and JavaScript</strong> plugin make your life easier?
 		Please support our free plugin by <a href="https://wordpress.org/support/view/plugin-reviews/'.$slug.'" target="_blank">writing a review</a>
 		Thanks!</p></div>
-		<script>jQuery(document).ready(function($){$(\'#'.$pre.'_rd_notice\').on(\'click\', \'.notice-dismiss\', function(){jQuery.post(ajaxurl, {action:\'hm_custom_css_js_rd_notice_hide\'})});});</script>
+		<script>jQuery(document).ready(function($){$(\'#'.$pre.'_rd_notice\').on(\'click\', \'.notice-dismiss\', function(){jQuery.post(ajaxurl, {action:\'hm_custom_css_js_rd_notice_hide\', _ajax_nonce:'.wp_json_encode(wp_create_nonce($pre.'_rd_notice_hide'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT).'})});});</script>
 	');
 }
 function hm_custom_css_js_rd_notice_hide() {
 	$pre = 'hm_custom_css_js';
+	if (!check_ajax_referer($pre.'_rd_notice_hide', false, false))
+		wp_send_json_error();
 	update_option($pre.'_rd_notice_hidden', 1);
 }
 

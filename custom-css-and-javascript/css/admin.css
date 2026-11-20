@@ -794,7 +794,7 @@ Access unminified version by replacing the .min.css extension with .css  */
 }
 
 @media (max-width: 761px) {
-  .hm_custom_code_editor_inner #pp_custom_css_js_dev_info, .hm_custom_code_editor_inner #wpz-custom-css-js-info {
+  .hm_custom_code_editor_inner #pp_custom_css_js_dev_info {
     display: none;
   }
   #hm_custom_code_editor {
@@ -802,53 +802,53 @@ Access unminified version by replacing the .min.css extension with .css  */
   }
 }
 @media (min-width: 760px) {
-  .wpz-custom-css-js-settings-active > #pp_custom_css_js_dev_info, .wpz-custom-css-js-settings-active > #wpz-custom-css-js-info {
+  .wpz-custom-css-js-settings-active > #pp_custom_css_js_dev_info {
     display: none;
   }
 }
-#pp_custom_css_js_dev_info, #wpz-custom-css-js-info {
+#pp_custom_css_js_dev_info {
   padding: 35px 20px;
   color: #fff;
   background-color: #6a39e4;
   border-radius: 11px;
   margin-bottom: 15px;
 }
-#pp_custom_css_js_dev_info h3, #wpz-custom-css-js-info h3 {
+#pp_custom_css_js_dev_info h3 {
   color: #fff;
   font-size: 22px;
 }
-#pp_custom_css_js_dev_info p, #wpz-custom-css-js-info p {
+#pp_custom_css_js_dev_info p {
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 600;
 }
-#pp_custom_css_js_dev_info ul, #wpz-custom-css-js-info ul {
+#pp_custom_css_js_dev_info ul {
   list-style: none;
   padding-left: 15px !important;
 }
-#pp_custom_css_js_dev_info ul > li, #wpz-custom-css-js-info ul > li {
+#pp_custom_css_js_dev_info ul > li {
   margin-bottom: 15px;
   position: relative;
 }
-#pp_custom_css_js_dev_info ul > li:before, #wpz-custom-css-js-info ul > li:before {
+#pp_custom_css_js_dev_info ul > li:before {
   content: url("../images/check-orange.svg");
   display: inline-block;
   position: relative;
   left: -25px;
   bottom: 0;
 }
-#pp_custom_css_js_dev_info li, #wpz-custom-css-js-info li {
+#pp_custom_css_js_dev_info li {
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 10px;
 }
-#pp_custom_css_js_dev_info li strong, #wpz-custom-css-js-info li strong {
+#pp_custom_css_js_dev_info li strong {
   color: #FD925C;
 }
-#pp_custom_css_js_dev_info .wpz-custom-css-js-button-primary, #wpz-custom-css-js-info .wpz-custom-css-js-button-primary {
+#pp_custom_css_js_dev_info .wpz-custom-css-js-button-primary {
   display: block;
 }
-#pp_custom_css_js_dev_info a, #wpz-custom-css-js-info a {
+#pp_custom_css_js_dev_info a {
   color: #fff;
 }
 
